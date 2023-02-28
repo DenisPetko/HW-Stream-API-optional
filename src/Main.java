@@ -16,13 +16,15 @@ public class Main {
         List<? extends T> list = stream.sorted(order).toList(); //Идея предложила collect(Collectors.toList()) заменить на просто .toList()
         if (list.isEmpty()) {
             minMaxConsumer.accept(null, null);
+        } else {
+            minMaxConsumer.accept(list.get(0), list.get(list.size() - 1));
         }
-        minMaxConsumer.accept(list.get(0), list.get(list.size() - 1));
     }
 
     public static void findEvenCount(List<Integer> list) {
-        System.out.println(list.stream()
+        System.out.println("Кол-во четных чисел: " + list.stream()
                 .filter(x -> x % 2 == 0)
+                .peek(x-> System.out.print("Четное: " + x + "; "))
                 .count());
     }
 
